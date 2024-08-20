@@ -109,4 +109,61 @@ class ArenaController extends Controller
             ]);
         }
     }
+
+    /*
+    Update record arena
+    Method: post
+    Uri: /api/arena/{id}
+    */
+    public function updateArena(Request $req, Arena $arena)
+    {
+        $validated = $req->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'id_desa' => ['required']
+        ]);
+
+        try {
+            // Check data arena
+            $slug = Str::slug($req->name, '-');
+
+            $data = $arena->updated([
+                'id_desa' => $req->id_desa,
+                'name' => $req->name,
+                'slug' => $slug
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Successfully updated arena',
+                'data' => $data
+            ]);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'msg' => $err->getMessage()
+            ]);
+        }
+    }
+
+    /*
+    Delete record arena
+    Method: delete
+    Uri: /api/arena/{id}
+    */
+    public function deleteArena(Arena $arena)
+    {
+        try {
+            $arena->delete();
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Successfully deleted arena'
+            ]);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'msg' => $err->getMessage()
+            ]);
+        }
+    }
 }
