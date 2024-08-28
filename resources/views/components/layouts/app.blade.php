@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>@yield('title')</title>
     @include('components.layouts.library.styling_import')
+
+    @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -44,6 +46,7 @@
     </div>
     <!-- ./wrapper -->
 
+    @livewireScripts
     @include('components.layouts.library.javascript_import')
 </body>
 
