@@ -12,4 +12,9 @@ class Jalurindex extends Component
     {
         return view('livewire.jalurindex');
     }
+
+    public function createPage()
+    {
+        return $this->redirect(JalurCreate::class);
+    }
 }

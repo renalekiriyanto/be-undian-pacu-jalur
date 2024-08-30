@@ -44,7 +44,7 @@
                                         <td>{{ ($data->currentpage() - 1) * $data->perpage() + $loop->index + 1 }}
                                         </td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->kecamatan->city->code_provinsi == '14' ? $item->kecamatan->name : $item->kecamatan->city->name }}
+                                        <td>{{ $item->kecamatan->city->code == '14.09' ? $item->kecamatan->name : $item->kecamatan->name . ' - ' . $item->kecamatan->city->name }}
                                         </td>
                                         <td>
                                             <div class="progress progress-xs">
