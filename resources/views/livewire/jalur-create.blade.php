@@ -38,41 +38,41 @@
                         </div>
                     @endforeach
                 @endif
-                <form action="" method="post" wire:submit="storeRecord">
-                    <div class="card">
-                        <div class="card-header">
-                            <button type="button" class="btn btn-default" wire:click="jalurPage">
-                                <i class="fas fa-caret-left mr-2 text-center"></i>
-                                Kembali
-                            </button>
-                        </div>
-                        <div class="card-body">
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button" class="btn btn-default" wire:click="jalurPage">
+                            <i class="fas fa-caret-left mr-2 text-center"></i>
+                            Kembali
+                        </button>
+                    </div>
+                    {{-- <form> --}}
+                    <div class="card-body">
 
-                            <div class="row mb-2">
-                                <div class="col-1">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="jalur_name">Nama Jalur</label>
-                                <input type="text" class="form-control" id="jalur_name"
-                                    placeholder="Masukkan nama jalur">
-                            </div>
-                            <div class="form-group">
-                                <label>Asal</label>
-                                <select class="form-control select2bs4" style="width: 100%;"
-                                    wire:model.change="daerah_dipilih">
-                                    <option selected="selected">--Pilih Daerah--</option>
-                                    @foreach ($villages as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="row mb-2">
+                            <div class="col-1">
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="form-group">
+                            <label for="jalur_name">Nama Jalur</label>
+                            <input type="text" class="form-control" id="jalur_name" placeholder="Masukkan nama jalur"
+                                wire:model="jalur_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Asal</label>
+                            <select class="form-control select2bs4" style="width: 100%;" wire:ignore
+                                wire:change="selectChange($event.target.value)">
+                                <option selected="selected">--Pilih Daerah--</option>
+                                @foreach ($villages as $desa)
+                                    <option value="{{ $desa->code }}">{{ $desa->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                </form>
+                    <div class="card-footer">
+                        <button type="button" wire:click="storeRecord" class="btn btn-primary">Simpan</button>
+                    </div>
+                    {{-- </form> --}}
+                </div>
             </div>
             <!-- /.container-fluid -->
         </section>
@@ -82,11 +82,10 @@
     @push('add-script')
         <script>
             $(function() {
-                $('.select2').select2()
-
-                $('.select2bs4').select2({
-                    theme: 'bootstrap4'
-                })
+                $('.select2bs4').on('change', function(e) {
+                    console.log('change')
+                    this.Livewire.emit('selectChange', $(this).val());
+                });
             })
         </script>
     @endpush

@@ -26,16 +26,19 @@ class JalurCreate extends Component
         ]);
     }
 
-    public function jalurPage()
+    public function getData($value)
     {
-        return $this->redirect(Jalurindex::class);
+        dd('asdasd', $value);
     }
 
     public function storeRecord()
     {
         // Check daerah
-        $daerah = Village::find((int)$this->daerah_dipilih);
-        dd($this->daerah_dipilih);
+        dd([
+            $this->jalur_name,
+            $this->daerah_dipilih
+        ]);
+        $daerah = Village::where($this->daerah_dipilih);
         if (!$daerah) {
             return session()->flash('error', ['Daerah tidak ditemukan/belum terdaftar']);
         }
@@ -54,5 +57,9 @@ class JalurCreate extends Component
         ]);
 
         return redirect(Jalurindex::class)->with('success', ['Berhasil daftar jalur']);
+    }
+    public function jalurPage()
+    {
+        return $this->redirect(Jalurindex::class);
     }
 }

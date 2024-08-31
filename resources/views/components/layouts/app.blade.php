@@ -46,8 +46,8 @@
     </div>
     <!-- ./wrapper -->
 
-    @livewireScripts
     @include('components.layouts.library.javascript_import')
+    @livewireScripts
 </body>
 
 </html>
