@@ -57,15 +57,13 @@
                             <input type="text" class="form-control" id="jalur_name" placeholder="Masukkan nama jalur"
                                 wire:model="jalur_name">
                         </div>
-                        <div class="form-group">
-                            <label>Asal</label>
-                            <select class="form-control select2bs4" style="width: 100%;" wire:ignore
-                                wire:change="selectChange($event.target.value)">
-                                <option selected="selected">--Pilih Daerah--</option>
-                                @foreach ($villages as $desa)
-                                    <option value="{{ $desa->code }}">{{ $desa->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#modalSearchAsal">Cari</button>
+                            </div>
+                            <!-- /btn-group -->
+                            <input type="text" class="form-control" wire:model="daerah_name">
                         </div>
                     </div>
                     <div class="card-footer">
@@ -79,14 +77,32 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @push('add-script')
+
+    <div class="modal fade" id="modalSearchAsal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Daftar Daerah</h4>
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> --}}
+                </div>
+                <div class="modal-body">
+                    @livewire('asal-pencarian')
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    @script
         <script>
-            $(function() {
-                $('.select2bs4').on('change', function(e) {
-                    console.log('change')
-                    this.Livewire.emit('selectChange', $(this).val());
-                });
-            })
+            $wire.on('selectDaerah', () => {
+                $('#modalSearchAsal').modal('hide')
+            });
         </script>
-    @endpush
+    @endscript
 </div>

@@ -7,6 +7,7 @@ use App\Models\Village;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\On;
 
 class JalurCreate extends Component
 {
@@ -15,7 +16,8 @@ class JalurCreate extends Component
     #[Validate('required')]
     public $jalur_name;
     #[Validate('required')]
-    public $daerah_dipilih;
+    public $daerah_code;
+    public $daerah_name;
 
     public function render()
     {
@@ -26,19 +28,10 @@ class JalurCreate extends Component
         ]);
     }
 
-    public function getData($value)
-    {
-        dd('asdasd', $value);
-    }
-
     public function storeRecord()
     {
         // Check daerah
-        dd([
-            $this->jalur_name,
-            $this->daerah_dipilih
-        ]);
-        $daerah = Village::where($this->daerah_dipilih);
+        $daerah = Village::where('code', $this->daerah_code)->first();
         if (!$daerah) {
             return session()->flash('error', ['Daerah tidak ditemukan/belum terdaftar']);
         }
@@ -56,8 +49,20 @@ class JalurCreate extends Component
             'slug' => $slug_jalur
         ]);
 
-        return redirect(Jalurindex::class)->with('success', ['Berhasil daftar jalur']);
+        session()->flash('success', ['Berhasil daftar jalur']);
+        $this->redirect(Jalurindex::class);
     }
+
+    #[On('selectDaerah')]
+    public function getDaerah($id)
+    {
+        $daerah = Village::find($id);
+
+        $this->daerah_code = $daerah->code;
+        $this->daerah_name = $daerah->name;
+        // $this->dispatchBrowserEvent('closeModal');
+    }
+
     public function jalurPage()
     {
         return $this->redirect(Jalurindex::class);

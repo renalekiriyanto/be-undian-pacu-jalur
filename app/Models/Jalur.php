@@ -13,6 +13,6 @@ class Jalur extends Model
 
     public function asal()
     {
-        return $this->belongsTo(Village::class, 'id', 'id_desa');
+        return $this->belongsTo(Village::class, 'id_desa', 'id');
     }
 }

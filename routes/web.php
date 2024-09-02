@@ -11,8 +11,8 @@ Route::get('/', function () {
 
 
 Route::prefix('jalur')->group(function () {
-    Route::get('/', Jalurindex::class);
-    Route::get('/tambah', JalurCreate::class);
+    Route::get('/', Jalurindex::class)->name('list_jalur');
+    Route::get('/tambah', JalurCreate::class)->name('tambah_jalur');
 });
 
 Route::prefix('daerah')->group(function () {

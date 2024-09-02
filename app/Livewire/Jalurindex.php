@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Jalur;
 use Livewire\Component;
 
 class Jalurindex extends Component
@@ -10,7 +11,10 @@ class Jalurindex extends Component
 
     public function render()
     {
-        return view('livewire.jalurindex');
+        $data = Jalur::paginate(10);
+        return view('livewire.jalurindex', [
+            'data' => $data
+        ]);
     }
 
     public function createPage()
