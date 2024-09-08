@@ -44,6 +44,7 @@
                                         <td>{{ ($data->currentpage() - 1) * $data->perpage() + $loop->index + 1 }}
                                         </td>
                                         <td>{{ $item->name }}</td>
+                                        {{-- @dd($item->name) --}}
                                         <td>{{ $item->kecamatan->city->code == '14.09' ? $item->kecamatan->name : $item->kecamatan->name . ' - ' . $item->kecamatan->city->name }}
                                         </td>
                                         <td>

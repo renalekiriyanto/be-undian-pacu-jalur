@@ -1,5 +1,7 @@
 @section('title', $title)
 <div>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -42,8 +44,7 @@
                         <div class="row mb-2">
                             <div class="col-1">
                                 <button type="button" class="btn btn-primary btn-block" wire:click="createPage"><i
-                                        class="fas fa-plus mr-2"></i>
-                                    Tambah
+                                        class="fas fa-plus mr-2"></i>Add
                                 </button>
                             </div>
                         </div>
@@ -63,7 +64,66 @@
                                         <td>{{ $item->name ?? '-' }}</td>
                                         <td>{{ $item->asal->name ?? '-' }}/{{ $item->asal->kecamatan->code_city == '14.09' ? $item->asal->kecamatan->name : $item->asal->kecamatan->city->name ?? '-' }}
                                         </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary btn-flat"
+                                                    data-toggle="modal" data-target="#modal-detail-{{ $item->id }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-flat"
+                                                    wire:click="pageEditJalur({{ $item->id }})">
+                                                    <i class="fas fa-pen"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-flat"
+                                                    wire:click="deleteJalur({{ $item->id }})">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal fade" id="modal-detail-{{ $item->id }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Detail jalur</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Nama Jalur</td>
+                                                                    <td>:</td>
+                                                                    <td>{{ $item->name }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Desa Asal</td>
+                                                                    <td>:</td>
+                                                                    <td>{{ $item->asal->name }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Kecamatan</td>
+                                                                    <td>:</td>
+                                                                    <td>{{ $item->asal->kecamatan->name }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Kota/Kabupaten</td>
+                                                                    <td>:</td>
+                                                                    <td>{{ $item->asal->kecamatan->city->name }}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -79,9 +139,4 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @push('add-script')
-        <script>
-            // toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-        </script>
-    @endpush
 </div>

@@ -21,4 +21,16 @@ class Jalurindex extends Component
     {
         return $this->redirect(JalurCreate::class);
     }
+
+    public function pageEditJalur($id)
+    {
+        return $this->redirect(route('edit_jalur', $id));
+    }
+
+    public function deleteJalur($id)
+    {
+        Jalur::destroy((int)$id);
+
+        session()->flash('success', ['Berhasil hapus jalur']);
+    }
 }
