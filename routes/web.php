@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\ArenaCreate;
+use App\Livewire\ArenaEdit;
+use App\Livewire\ArenaIndex;
 use App\Livewire\DaerahList;
 use App\Livewire\JalurCreate;
 use App\Livewire\JalurEdit;
@@ -22,5 +25,7 @@ Route::group(['prefix' => 'daerah', 'as' => 'daerah.'], function () {
 });
 
 Route::group(['prefix' => 'arena', 'as' => 'arena.'], function () {
-    Route::get('/', DaerahList::class)->name('list');
+    Route::get('/', ArenaIndex::class)->name('list');
+    Route::get('/add', ArenaCreate::class)->name('add');
+    Route::get('/edit/{id}', ArenaEdit::class)->name('edit');
 });
