@@ -34,6 +34,8 @@
 <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('adminlte/plugins/toastr/toastr.min.js') }}"></script>
+<!-- Bootstrap Switch -->
+<script src="{{ asset('adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
 
 <script>
     $(function() {
@@ -41,6 +43,13 @@
 
         $('.select2bs4').select2({
             theme: 'bootstrap4'
+        })
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
     })
 </script>

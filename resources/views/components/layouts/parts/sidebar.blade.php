@@ -45,6 +45,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item menu-open">
+                <a href="{{ route('lottery.list') }}" class="nav-link {{ Route::is('lottery.*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                        Undian
+                    </p>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
