@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_undian');
             $table->unsignedBigInteger('id_putaran');
 
-            $table->unsignedBigInteger('id_jalur_kiri');
-            $table->unsignedBigInteger('id_jalur_kanan');
-            $table->unsignedInteger('id_jalur_menang')->nullable();
+            $table->unsignedBigInteger('id_jalur_kiri')->nullable();
+            $table->unsignedBigInteger('id_jalur_kanan')->nullable();
+            $table->unsignedBigInteger('id_jalur_menang')->nullable();
 
             $table->bigInteger('urutan_hilir');
             $table->bigInteger('hari')->default(1);

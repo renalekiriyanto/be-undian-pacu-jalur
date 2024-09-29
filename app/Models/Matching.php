@@ -9,4 +9,9 @@ class Matching extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function lottery()
+    {
+        return $this->belongsTo(Lottery::class, 'id_undian', 'id');
+    }
 }

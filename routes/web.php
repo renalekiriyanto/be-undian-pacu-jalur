@@ -10,6 +10,8 @@ use App\Livewire\Jalurindex;
 use App\Livewire\LotteryCreate;
 use App\Livewire\LotteryEdit;
 use App\Livewire\LotteryIndex;
+use App\Livewire\MatchCreate;
+use App\Livewire\MatchIndex;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -37,5 +39,10 @@ Route::group(['prefix' => 'lottery', 'as' => 'lottery.'], function () {
     Route::get('/', LotteryIndex::class)->name('list');
     Route::get('/add', LotteryCreate::class)->name('add');
     Route::get('/edit/{id}', LotteryEdit::class)->name('edit');
-    // Route::get('/edit/{id}', ArenaEdit::class)->name('edit');
+});
+
+Route::group(['prefix' => 'match', 'as' => 'match.'], function () {
+    Route::get('/', MatchIndex::class)->name('list');
+    Route::get('/add', MatchCreate::class)->name('add');
+    // Route::get('/edit/{id}', MatchEdit::class)->name('edit');
 });

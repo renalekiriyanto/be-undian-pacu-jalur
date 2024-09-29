@@ -53,6 +53,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item menu-open">
+                <a href="{{ route('match.list') }}" class="nav-link {{ Route::is('match.*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                        Match
+                    </p>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
