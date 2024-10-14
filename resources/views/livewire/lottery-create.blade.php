@@ -40,7 +40,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <button type="button" class="btn btn-default" wire:click="jalurPage">
+                        <button type="button" class="btn btn-default" wire:click="lotteryPage">
                             <i class="fas fa-caret-left mr-2 text-center"></i>
                             Kembali
                         </button>
@@ -67,6 +67,7 @@
                                 <input type="date" class="form-control " wire:model="date_match" />
                             </div>
                         </div>
+
                     </div>
                     <div class="card-footer">
                         <button type="button" wire:click="storeRecord" class="btn btn-primary">Simpan</button>

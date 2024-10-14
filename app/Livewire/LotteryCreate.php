@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Arena;
 use App\Models\Lottery;
 use App\Models\Matching;
+use Faker\Provider\Lorem;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -15,13 +16,7 @@ class LotteryCreate extends Component
     public $day_of;
     public $id_arena;
     public $name_arena;
-    public $is_last_day;
     public $date_match;
-
-    public function mount()
-    {
-        $this->is_last_day = false;
-    }
 
     public function render()
     {
@@ -53,7 +48,14 @@ class LotteryCreate extends Component
             'match_date' => $this->date_match
         ]);
 
+
+
         session()->flash('success', ['Berhasil buat undian']);
+        $this->redirect(LotteryIndex::class);
+    }
+
+    public function lotteryPage()
+    {
         $this->redirect(LotteryIndex::class);
     }
 }

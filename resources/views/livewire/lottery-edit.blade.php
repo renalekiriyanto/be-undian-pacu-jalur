@@ -63,8 +63,19 @@
                         </div>
                         <div class="form-group">
                             <label>Date:</label>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="date" class="form-control " wire:model="date_match" />
+                            <div class="input-group" id="reservationdate" data-target-input="nearest">
+                                <input type="date" class="form-control" wire:model="date_match" />
+                            </div>
+                        </div>
+                        @if ($is_empty)
+                            <div>
+                                <h3 class="text-center">Daftar Hilir Undian Masih Kosong</h3>
+                            </div>
+                        @endif
+                        <div class="row">
+                            <div class="col-2">
+                                <button type="button" class="btn btn-block bg-gradient-primary" data-toggle="modal"
+                                    data-target="#modalTambahPutaran">Tambah Putaran</button>
                             </div>
                         </div>
                     </div>
@@ -84,9 +95,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Daftar Arena</h4>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
                 </div>
                 <div class="modal-body">
                     @livewire('arena-pencarian')
@@ -98,11 +106,33 @@
         </div>
         <!-- /.modal-content -->
     </div>
+
+    {{-- Modal Tambah Putaran --}}
+    <div class="modal fade" id="modalTambahPutaran">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Putaran</h4>
+                </div>
+                <div class="modal-body">
+                    @livewire('tambah-putaran', ['id_undian' => $lottery_id])
+                </div>
+            </div>
+            {{-- <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> --}}
+        </div>
+        <!-- /.modal-content -->
+    </div>
     <!-- /.modal-dialog -->
     @script
         <script>
             $wire.on('selectArena', () => {
                 $('#modalSearchArena').modal('hide')
+            });
+
+            $wire.on('tambahPutaran', () => {
+                $('#modalTambahPutaran').modal('hide')
             });
         </script>
     @endscript
